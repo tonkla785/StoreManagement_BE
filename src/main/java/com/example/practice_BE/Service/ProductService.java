@@ -4,6 +4,7 @@ import com.example.practice_BE.DTO.ProductRequestDTO;
 import com.example.practice_BE.Entity.ProductEntity;
 import com.example.practice_BE.Repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
@@ -41,9 +42,9 @@ public class ProductService{
     }
 
     //Get All Service
-    public List<ProductEntity> findAll(){
+    public List<ProductEntity> findAll(Sort sort){
         try {
-            return productRepository.findAll();
+            return productRepository.findAll(sort);
         }catch (Exception e){
             throw new RuntimeException("Error while Searching",e);
         }

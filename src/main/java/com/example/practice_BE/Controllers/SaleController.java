@@ -4,6 +4,7 @@ import com.example.practice_BE.DTO.SaleDetailRequestDTO;
 import com.example.practice_BE.Entity.SaleEntity;
 import com.example.practice_BE.Service.SaleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -92,7 +93,7 @@ public class SaleController {
     @GetMapping("/")
     public ResponseEntity<?> getAllBill() {
         try {
-            List<SaleEntity> Sale = saleService.findAll();
+            List<SaleEntity> Sale = saleService.findAll(Sort.by(Sort.Direction.ASC, "saleId"));
             return ResponseEntity.ok(Map.of(
                     "responseStatus", 200,
                     "responseMessage", "ดึงข้อมูลบิลทั้งหมดสำเร็จ",

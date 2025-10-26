@@ -6,7 +6,7 @@ public class SaleDetailRequestDTO {
     private Integer quantity;
     private String billName;
 
-    public SaleDetailRequestDTO(Long productId, Integer quantity) {
+    public SaleDetailRequestDTO(Long productId, Integer quantity, String billName) {
         this.productId = productId;
         this.quantity = quantity;
         this.billName = billName;

@@ -8,6 +8,7 @@ import com.example.practice_BE.Repository.ProductRepository;
 import com.example.practice_BE.Repository.SaleDetailRepository;
 import com.example.practice_BE.Repository.SaleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -94,9 +95,9 @@ public class SaleService {
     }
 
     //Get All bill
-    public List<SaleEntity> findAll(){
+    public List<SaleEntity> findAll(Sort sort){
         try {
-            return saleRepository.findAll();
+            return saleRepository.findAll(sort);
         }catch (Exception e){
             throw new RuntimeException("Error while Searching",e);
         }

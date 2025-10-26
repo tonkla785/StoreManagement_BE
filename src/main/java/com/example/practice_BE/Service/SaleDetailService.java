@@ -1,5 +1,6 @@
 package com.example.practice_BE.Service;
 
+import com.example.practice_BE.Entity.ProductEntity;
 import com.example.practice_BE.Repository.SaleDetailRepository;
 import com.example.practice_BE.Repository.SaleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,10 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class SaleDetailService {
@@ -22,13 +27,23 @@ public class SaleDetailService {
     }
 
     //Get Total sale product
-    public int getTotalQuantityByProduct(Long productId) {
-        try{
-            Integer total = saleDetailRepository.getTotalQuantityByProduct(productId);
-            return total != null ? total : 0;
-        } catch (Exception e) {
-            throw new RuntimeException("Error while get total sale product id: "+productId,e);
+    public List<Map<String, Object>> getTotalQuantityForAllProducts() {
+        List<Object[]> results = saleDetailRepository.getTotalQuantityForAllProducts();
+        List<Map<String, Object>> data = new ArrayList<>();
+
+        for (Object[] row : results) {
+            ProductEntity product = (ProductEntity) row[0];
+            Long totalQuantity = (Long) row[1];
+
+            Map<String, Object> map = new HashMap<>();
+            map.put("productId", product.getProductId());
+            map.put("productName", product.getProductName());
+            map.put("totalQuantity", totalQuantity);
+
+            data.add(map);
         }
+
+        return data;
     }
 
     //Get total sale summary Month

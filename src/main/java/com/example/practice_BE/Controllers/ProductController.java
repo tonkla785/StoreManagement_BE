@@ -3,8 +3,8 @@ package com.example.practice_BE.Controllers;
 import com.example.practice_BE.DTO.ProductRequestDTO;
 import com.example.practice_BE.Entity.ProductEntity;
 import com.example.practice_BE.Service.ProductService;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -49,7 +49,7 @@ public class ProductController {
     @GetMapping("/")
     public ResponseEntity<?> getAllProduct() {
         try {
-            List<ProductEntity> products = productService.findAll();
+            List<ProductEntity> products = productService.findAll(Sort.by(Sort.Direction.ASC, "productId"));
             return ResponseEntity.ok(Map.of(
                     "responseStatus", 200,
                     "responseMessage", "ดึงข้อมูลสินค้าทั้งหมดสำเร็จ",

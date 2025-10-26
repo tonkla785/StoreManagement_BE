@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -21,14 +22,14 @@ public class SaleDetailController {
         this.saleDetailService = saleDetailService;
     }
 
-    @GetMapping("/sum-product/{id}")
-    public ResponseEntity<?> getProductSale(@PathVariable Long id) {
+    @GetMapping("/sum-all-products")
+    public ResponseEntity<?> getAllProductSales() {
         try {
-            int totalQuantity = saleDetailService.getTotalQuantityByProduct(id);
+            List<Map<String, Object>> data = saleDetailService.getTotalQuantityForAllProducts();
             return ResponseEntity.ok(Map.of(
                     "responseStatus", 200,
                     "responseMessage", "ดึงข้อมูลสำเร็จ",
-                    "data", totalQuantity
+                    "data", data
             ));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of(
