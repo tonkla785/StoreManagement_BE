@@ -12,7 +12,7 @@ public class CorsConfig {
         return new WebMvcConfigurer() {
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("http://localhost:4200")
+                        .allowedOrigins("https://storemanagement-fe.onrender.com")
                         .allowedMethods("GET", "POST", "PUT", "DELETE");
             }
         };
