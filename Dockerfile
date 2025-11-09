@@ -1,5 +1,5 @@
-# ใช้ Java 21 เป็น base image
-FROM openjdk:21-jdk-slim
+# ใช้ Java 21 base image ที่มีอยู่จริง
+FROM openjdk:21-slim
 
 # ตั้ง working directory
 WORKDIR /app
